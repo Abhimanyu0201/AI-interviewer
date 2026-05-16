@@ -6,9 +6,14 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+const allowedOrigins = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(",").map((origin) => origin.trim())
+    : [
+        "http://localhost:5173",
+        "https://ai-interviewer-frontend-to78.onrender.com"
+    ]
 app.use(cors({
-    origin: ["http://localhost:5173",
-        "https://ai-interviewer-frontend-to78.onrender.com"]
+    origin: allowedOrigins,
     credentials: true
 }))
 
